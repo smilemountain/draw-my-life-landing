@@ -1,0 +1,9 @@
+# robots.txt for Draw My Life
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://smilemountain.github.io/draw-my-life-landing/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1

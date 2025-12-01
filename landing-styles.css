@@ -18,13 +18,23 @@ body {
     @apply text-gray-600 hover:text-purple-600 font-medium transition-colors;
 }
 
-/* 语言切换按钮 */
-.lang-btn {
-    @apply text-gray-600;
+/* 语言下拉选择器 */
+.language-select {
+    min-width: 140px;
+    background-image: none;
 }
 
-.lang-btn.active {
-    @apply bg-white text-purple-600 shadow-sm;
+.language-select:hover {
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.language-select:focus {
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.language-select option {
+    padding: 8px;
+    font-size: 14px;
 }
 
 /* Hero 区域渐变背景 */
@@ -127,18 +137,159 @@ button:disabled {
 }
 
 /* 响应式调整 */
-@media (max-width: 768px) {
+
+/* 移动端优化 (小于640px) */
+@media (max-width: 640px) {
     .hero-section {
-        padding-top: 80px;
-        padding-bottom: 60px;
+        padding-top: 100px !important;
+        padding-bottom: 60px !important;
+    }
+    
+    .hero-section h2 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+    }
+    
+    .hero-section p {
+        font-size: 1.125rem !important;
     }
     
     .feature-card {
-        padding: 24px;
+        padding: 20px;
+    }
+    
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+    
+    .feature-icon i {
+        font-size: 1.5rem !important;
     }
     
     .faq-question {
         padding: 16px;
+        font-size: 0.95rem;
+    }
+    
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+    
+    /* 导航栏移动端优化 */
+    nav .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    nav h1 {
+        font-size: 1.25rem !important;
+    }
+    
+    nav .fa-palette {
+        font-size: 1.5rem !important;
+    }
+    
+    /* 语言选择器优化 */
+    .language-select {
+        min-width: 120px;
+        padding: 0.5rem 2rem 0.5rem 0.75rem !important;
+        font-size: 0.875rem !important;
+    }
+    
+    /* 页脚优化 */
+    footer {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    footer h4 {
+        font-size: 1.125rem !important;
+    }
+    
+    footer .grid {
+        gap: 2rem;
+    }
+}
+
+/* 平板优化 (641px - 1024px) */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 120px;
+        padding-bottom: 80px;
+    }
+    
+    .hero-section h2 {
+        font-size: 3rem;
+    }
+    
+    .hero-section p {
+        font-size: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 28px;
+    }
+    
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    
+    /* 两列布局优化 */
+    .grid.md\\:grid-cols-2 {
+        gap: 2rem;
+    }
+    
+    .grid.lg\\:grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    /* 增加可点击区域 */
+    button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 0;
+    }
+    
+    .faq-question {
+        padding: 1.25rem;
+    }
+    
+    /* 移除悬停效果，使用点击效果 */
+    .feature-card:active {
+        transform: scale(0.98);
+    }
+    
+    button:active {
+        transform: scale(0.95);
+    }
+}
+
+/* 横屏模式优化 */
+@media (max-width: 896px) and (orientation: landscape) {
+    .hero-section {
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+    
+    .hero-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-section p {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
     }
 }
 

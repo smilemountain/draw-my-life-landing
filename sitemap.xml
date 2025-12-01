@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://smilemountain.github.io/draw-my-life-landing/</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://smilemountain.github.io/draw-my-life-landing/?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://smilemountain.github.io/draw-my-life-landing/?lang=zh"/>
+    </url>
+    
+    <!-- Features Section -->
+    <url>
+        <loc>https://smilemountain.github.io/draw-my-life-landing/#features</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Advantages Section -->
+    <url>
+        <loc>https://smilemountain.github.io/draw-my-life-landing/#advantages</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- FAQ Section -->
+    <url>
+        <loc>https://smilemountain.github.io/draw-my-life-landing/#faq</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Contact Section -->
+    <url>
+        <loc>https://smilemountain.github.io/draw-my-life-landing/#contact</loc>
+        <lastmod>2025-12-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+</urlset>

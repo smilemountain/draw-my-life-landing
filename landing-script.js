@@ -12,12 +12,11 @@ const translations = {
         nav_advantages: "优势",
         nav_faq: "常见问题",
         nav_contact: "联系",
-        nav_trial: "申请试用",
         
         // Hero 区域
         hero_title: "AI 手绘画画打分系统",
         hero_subtitle: "为小朋友和绘画爱好者提供专业的 AI 评分和反馈",
-        hero_cta_primary: "立即试用",
+        hero_cta_primary: "联系我们",
         hero_cta_secondary: "开始打分",
         
         // 功能区域
@@ -48,23 +47,6 @@ const translations = {
         advantage4_title: "安全可靠",
         advantage4_desc: "完善的文件验证和错误处理机制，保障数据安全",
         
-        // 试用申请表单
-        trial_title: "申请试用",
-        trial_subtitle: "填写信息，我们会尽快与您联系",
-        form_name: "姓名",
-        form_name_placeholder: "请输入您的姓名",
-        form_email: "邮箱",
-        form_email_placeholder: "请输入您的邮箱",
-        form_company: "公司",
-        form_company_placeholder: "请输入您的公司名称（可选）",
-        form_phone: "联系电话",
-        form_phone_placeholder: "请输入您的联系电话（可选）",
-        form_message: "留言",
-        form_message_placeholder: "请告诉我们您的需求或问题（可选）",
-        form_submit: "提交申请",
-        form_success: "申请成功！我们会尽快与您联系。",
-        form_error: "申请失败，请重试",
-        form_network_error: "网络错误，请检查连接",
         
         // FAQ
         faq_title: "常见问题",
@@ -84,8 +66,8 @@ const translations = {
         footer_about_title: "关于我们",
         footer_about_desc: "Draw My Life 是一个专业的 AI 绘画评分系统，致力于为小朋友和绘画爱好者提供专业的评分和反馈服务。",
         footer_links_title: "快速链接",
-        footer_start: "开始使用",
         footer_contact_title: "联系我们",
+        footer_contact_desc: "如果您对本产品感兴趣，欢迎通过邮件联系我们",
         footer_copyright: "© 2025 Draw My Life. 保留所有权利."
     },
     en: {
@@ -94,12 +76,11 @@ const translations = {
         nav_advantages: "Advantages",
         nav_faq: "FAQ",
         nav_contact: "Contact",
-        nav_trial: "Request Trial",
         
         // Hero Section
         hero_title: "AI Drawing Scoring System",
         hero_subtitle: "Professional AI scoring and feedback for kids and drawing enthusiasts",
-        hero_cta_primary: "Try Now",
+        hero_cta_primary: "Contact Us",
         hero_cta_secondary: "Start Scoring",
         
         // Features Section
@@ -130,23 +111,6 @@ const translations = {
         advantage4_title: "Safe and Reliable",
         advantage4_desc: "Complete file validation and error handling for data security",
         
-        // Trial Form
-        trial_title: "Request Trial",
-        trial_subtitle: "Fill in the information and we'll contact you soon",
-        form_name: "Name",
-        form_name_placeholder: "Please enter your name",
-        form_email: "Email",
-        form_email_placeholder: "Please enter your email",
-        form_company: "Company",
-        form_company_placeholder: "Please enter your company name (optional)",
-        form_phone: "Phone",
-        form_phone_placeholder: "Please enter your phone number (optional)",
-        form_message: "Message",
-        form_message_placeholder: "Tell us your needs or questions (optional)",
-        form_submit: "Submit Application",
-        form_success: "Application successful! We'll contact you soon.",
-        form_error: "Application failed, please try again",
-        form_network_error: "Network error, please check your connection",
         
         // FAQ
         faq_title: "Frequently Asked Questions",
@@ -166,14 +130,14 @@ const translations = {
         footer_about_title: "About Us",
         footer_about_desc: "Draw My Life is a professional AI drawing scoring system dedicated to providing professional scoring and feedback services for children and drawing enthusiasts.",
         footer_links_title: "Quick Links",
-        footer_start: "Get Started",
         footer_contact_title: "Contact Us",
+        footer_contact_desc: "If you're interested in this product, feel free to contact us via email",
         footer_copyright: "© 2025 Draw My Life. All rights reserved."
     }
 };
 
 // 当前语言
-let currentLanguage = localStorage.getItem('language') || 'zh';
+let currentLanguage = localStorage.getItem('language') || 'en';
 
 /**
  * 切换语言
@@ -213,18 +177,12 @@ function updatePageLanguage() {
 }
 
 /**
- * 更新语言按钮状态
+ * 更新语言选择器状态
  */
 function updateLanguageButtons() {
-    const zhBtn = document.getElementById('langZh');
-    const enBtn = document.getElementById('langEn');
-    
-    if (currentLanguage === 'zh') {
-        zhBtn.classList.add('active');
-        enBtn.classList.remove('active');
-    } else {
-        enBtn.classList.add('active');
-        zhBtn.classList.remove('active');
+    const languageSelector = document.getElementById('languageSelector');
+    if (languageSelector) {
+        languageSelector.value = currentLanguage;
     }
 }
 
@@ -290,68 +248,6 @@ function showErrorMessage(message) {
     }, 5000);
 }
 
-/**
- * 提交试用申请表单
- * @param {Event} event - 表单提交事件
- */
-async function submitTrialForm(event) {
-    event.preventDefault();
-    
-    // 获取表单数据
-    const formData = {
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        company: document.getElementById('company').value.trim() || null,
-        phone: document.getElementById('phone').value.trim() || null,
-        message: document.getElementById('message').value.trim() || null,
-    };
-    
-    // 基本验证
-    if (!formData.name || !formData.email) {
-        showErrorMessage(translations[currentLanguage].form_error);
-        return;
-    }
-    
-    // 前端邮箱格式验证
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-        showErrorMessage(currentLanguage === 'zh' ? '邮箱格式不正确' : 'Email format is incorrect');
-        return;
-    }
-    
-    // 禁用提交按钮
-    const submitBtn = event.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = currentLanguage === 'zh' ? '提交中...' : 'Submitting...';
-    
-    try {
-        const response = await fetch('/api/landing/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
-        
-        if (response.ok) {
-            const result = await response.json();
-            showSuccessMessage(translations[currentLanguage].form_success);
-            // 重置表单
-            document.getElementById('trialForm').reset();
-        } else {
-            const error = await response.json();
-            showErrorMessage(error.detail || translations[currentLanguage].form_error);
-        }
-    } catch (error) {
-        console.error('提交失败:', error);
-        showErrorMessage(translations[currentLanguage].form_network_error);
-    } finally {
-        // 恢复提交按钮
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-    }
-}
 
 /**
  * 平滑滚动到指定元素
@@ -372,12 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 初始化语言
     updatePageLanguage();
     updateLanguageButtons();
-    
-    // 绑定表单提交事件
-    const trialForm = document.getElementById('trialForm');
-    if (trialForm) {
-        trialForm.addEventListener('submit', submitTrialForm);
-    }
     
     // 处理导航链接的平滑滚动
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
