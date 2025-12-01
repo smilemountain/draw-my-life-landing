@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw My Life - AI手绘画画打分系统</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="landing-styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-palette text-3xl text-purple-600"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">Draw My Life</h1>
+                </div>
+
+                <!-- 导航菜单 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="nav-link" data-i18n="nav_features">功能</a>
+                    <a href="#advantages" class="nav-link" data-i18n="nav_advantages">优势</a>
+                    <a href="#faq" class="nav-link" data-i18n="nav_faq">常见问题</a>
+                    <a href="#contact" class="nav-link" data-i18n="nav_contact">联系</a>
+                </div>
+
+                <!-- 语言切换和试用按钮 -->
+                <div class="flex items-center space-x-4">
+                    <!-- 语言切换 -->
+                    <div class="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
+                        <button 
+                            id="langZh" 
+                            onclick="switchLanguage('zh')" 
+                            class="lang-btn active px-3 py-1 rounded-md text-sm font-medium transition-colors"
+                        >
+                            中文
+                        </button>
+                        <button 
+                            id="langEn" 
+                            onclick="switchLanguage('en')" 
+                            class="lang-btn px-3 py-1 rounded-md text-sm font-medium transition-colors"
+                        >
+                            English
+                        </button>
+                    </div>
+
+                    <!-- 试用按钮 -->
+                    <a 
+                        href="#trial" 
+                        class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                        data-i18n="nav_trial"
+                    >
+                        申请试用
+                    </a>
+
+                    <!-- 移动端菜单按钮 -->
+                    <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 移动端菜单 -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#features" class="block py-2 text-gray-600 hover:text-purple-600" data-i18n="nav_features">功能</a>
+                <a href="#advantages" class="block py-2 text-gray-600 hover:text-purple-600" data-i18n="nav_advantages">优势</a>
+                <a href="#faq" class="block py-2 text-gray-600 hover:text-purple-600" data-i18n="nav_faq">常见问题</a>
+                <a href="#contact" class="block py-2 text-gray-600 hover:text-purple-600" data-i18n="nav_contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section pt-24 pb-16 md:pt-32 md:pb-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 fade-in" data-i18n="hero_title">
+                    AI 手绘画画打分系统
+                </h2>
+                <p class="text-xl md:text-2xl text-white opacity-90 mb-8 fade-in" data-i18n="hero_subtitle">
+                    为小朋友和绘画爱好者提供专业的 AI 评分和反馈
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 fade-in">
+                    <a 
+                        href="#trial" 
+                        class="bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg"
+                        data-i18n="hero_cta_primary"
+                    >
+                        立即试用
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能介绍区域 -->
+    <section id="features" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="features_title">
+                    核心功能
+                </h3>
+                <p class="text-xl text-gray-600" data-i18n="features_subtitle">
+                    专业的 AI 技术，为您的画作提供全方位评估
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 功能卡片 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-blue-100">
+                        <i class="fas fa-cloud-upload-alt text-blue-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3" data-i18n="feature1_title">
+                        简单上传
+                    </h4>
+                    <p class="text-gray-600" data-i18n="feature1_desc">
+                        支持拖拽和点击上传，轻松提交您的手绘画作
+                    </p>
+                </div>
+
+                <!-- 功能卡片 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-green-100">
+                        <i class="fas fa-robot text-green-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3" data-i18n="feature2_title">
+                        AI 评分
+                    </h4>
+                    <p class="text-gray-600" data-i18n="feature2_desc">
+                        使用先进的 AI 模型进行多维度专业评分
+                    </p>
+                </div>
+
+                <!-- 功能卡片 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-purple-100">
+                        <i class="fas fa-magic text-purple-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3" data-i18n="feature3_title">
+                        AI 润色
+                    </h4>
+                    <p class="text-gray-600" data-i18n="feature3_desc">
+                        自动生成优化后的润色图片，提升画作质量
+                    </p>
+                </div>
+
+                <!-- 功能卡片 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-yellow-100">
+                        <i class="fas fa-chart-bar text-yellow-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3" data-i18n="feature4_title">
+                        详细反馈
+                    </h4>
+                    <p class="text-gray-600" data-i18n="feature4_desc">
+                        获取专业的评分标准和改进建议
+                    </p>
+                </div>
+
+                <!-- 功能卡片 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-red-100">
+                        <i class="fas fa-mobile-alt text-red-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3" data-i18n="feature5_title">
+                        响应式设计
+                    </h4>
+                    <p class="text-gray-600" data-i18n="feature5_desc">
+                        完美支持手机、平板、桌面端多种设备
+                    </p>
+                </div>
+
+                <!-- 功能卡片 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-indigo-100">
+                        <i class="fas fa-bolt text-indigo-600 text-3xl"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3" data-i18n="feature6_title">
+                        并行处理
+                    </h4>
+                    <p class="text-gray-600" data-i18n="feature6_desc">
+                        评分和图片生成同时执行，大幅提升效率
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优势展示区域 -->
+    <section id="advantages" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="advantages_title">
+                    为什么选择我们
+                </h3>
+                <p class="text-xl text-gray-600" data-i18n="advantages_subtitle">
+                    专业、快速、可靠的 AI 绘画评分服务
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <!-- 优势 1 -->
+                <div class="advantage-item">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="advantage1_title">
+                                专业 AI 技术
+                            </h4>
+                            <p class="text-gray-600" data-i18n="advantage1_desc">
+                                <!-- 内容将通过 JavaScript 翻译动态更新 -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 优势 2 -->
+                <div class="advantage-item">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="advantage2_title">
+                                快速响应
+                            </h4>
+                            <p class="text-gray-600" data-i18n="advantage2_desc">
+                                并行处理技术，评分和图片生成同时进行，节省等待时间
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 优势 3 -->
+                <div class="advantage-item">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="advantage3_title">
+                                易于使用
+                            </h4>
+                            <p class="text-gray-600" data-i18n="advantage3_desc">
+                                简洁直观的界面设计，无需专业知识即可轻松上手
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 优势 4 -->
+                <div class="advantage-item">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-purple-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold text-gray-800 mb-2" data-i18n="advantage4_title">
+                                安全可靠
+                            </h4>
+                            <p class="text-gray-600" data-i18n="advantage4_desc">
+                                完善的文件验证和错误处理机制，保障数据安全
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 试用申请表单区域 -->
+    <section id="trial" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="trial_title">
+                        申请试用
+                    </h3>
+                    <p class="text-xl text-gray-600" data-i18n="trial_subtitle">
+                        填写信息，我们会尽快与您联系
+                    </p>
+                </div>
+
+                <!-- 表单 -->
+                <form id="trialForm" class="bg-gray-50 rounded-2xl p-8 shadow-lg">
+                    <!-- 姓名 -->
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 font-medium mb-2" data-i18n="form_name">
+                            姓名 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            data-i18n-placeholder="form_name_placeholder"
+                            placeholder="请输入您的姓名"
+                        >
+                    </div>
+
+                    <!-- 邮箱 -->
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 font-medium mb-2" data-i18n="form_email">
+                            邮箱 <span class="text-red-500">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            data-i18n-placeholder="form_email_placeholder"
+                            placeholder="请输入您的邮箱"
+                        >
+                    </div>
+
+                    <!-- 公司（可选） -->
+                    <div class="mb-6">
+                        <label for="company" class="block text-gray-700 font-medium mb-2" data-i18n="form_company">
+                            公司
+                        </label>
+                        <input 
+                            type="text" 
+                            id="company" 
+                            name="company"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            data-i18n-placeholder="form_company_placeholder"
+                            placeholder="请输入您的公司名称（可选）"
+                        >
+                    </div>
+
+                    <!-- 电话（可选） -->
+                    <div class="mb-6">
+                        <label for="phone" class="block text-gray-700 font-medium mb-2" data-i18n="form_phone">
+                            联系电话
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            data-i18n-placeholder="form_phone_placeholder"
+                            placeholder="请输入您的联系电话（可选）"
+                        >
+                    </div>
+
+                    <!-- 留言（可选） -->
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 font-medium mb-2" data-i18n="form_message">
+                            留言
+                        </label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="4"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            data-i18n-placeholder="form_message_placeholder"
+                            placeholder="请告诉我们您的需求或问题（可选）"
+                        ></textarea>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <button 
+                        type="submit" 
+                        class="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-lg font-bold text-lg transition-colors"
+                        data-i18n="form_submit"
+                    >
+                        提交申请
+                    </button>
+                </form>
+
+                <!-- 成功/错误提示 -->
+                <div id="formMessage" class="hidden mt-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题区域 -->
+    <section id="faq" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4" data-i18n="faq_title">
+                    常见问题
+                </h3>
+                <p class="text-xl text-gray-600" data-i18n="faq_subtitle">
+                    解答您可能关心的问题
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ 项 1 -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq1_question">系统支持哪些图片格式？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq1_answer">
+                            系统支持 JPG、JPEG、PNG、GIF、BMP、TIFF、WEBP 等常见图片格式，文件大小不超过 10MB。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 项 2 -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq2_question">AI 评分的标准是什么？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq2_answer">
+                            AI 会从创意与想象力、色彩运用、构图与布局、细节与完成度、表现力等多个维度对画作进行评分，每项评分范围为 1-10 分。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 项 3 -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq3_question">评分需要多长时间？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq3_answer">
+                            通常情况下，AI 评分和图片生成会在 30-60 秒内完成。系统采用并行处理技术，两个任务同时进行，大幅缩短等待时间。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 项 4 -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq4_question">上传的图片会被保存吗？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq4_answer">
+                            上传的图片会临时保存在服务器上用于评分和生成，处理完成后会定期清理。我们重视您的隐私，不会将图片用于其他用途。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 项 5 -->
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span data-i18n="faq5_question">系统适合什么年龄段使用？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-i18n="faq5_answer">
+                            系统主要面向小朋友和绘画爱好者，适合所有年龄段使用。无论是儿童涂鸦还是专业画作，AI 都能提供有价值的反馈。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact" class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- 关于 -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4" data-i18n="footer_about_title">关于我们</h4>
+                    <p class="text-gray-400" data-i18n="footer_about_desc">
+                        Draw My Life 是一个专业的 AI 绘画评分系统，致力于为小朋友和绘画爱好者提供专业的评分和反馈服务。
+                    </p>
+                </div>
+
+                <!-- 快速链接 -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4" data-i18n="footer_links_title">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav_features">功能</a></li>
+                        <li><a href="#advantages" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav_advantages">优势</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav_faq">常见问题</a></li>
+                        <li><a href="/frontend/index.html" class="text-gray-400 hover:text-white transition-colors" data-i18n="footer_start">开始使用</a></li>
+                    </ul>
+                </div>
+
+                <!-- 联系方式 -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4" data-i18n="footer_contact_title">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-envelope mr-2"></i> contact@drawmylife.com</li>
+                        <li><i class="fas fa-globe mr-2"></i> www.drawmylife.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 版权信息 -->
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p data-i18n="footer_copyright">
+                    &copy; 2025 Draw My Life. 保留所有权利.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="landing-script.js"></script>
+</body>
+</html>
