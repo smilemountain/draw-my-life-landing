@@ -15,8 +15,14 @@ if (typeof gtag === 'undefined') {
  */
 function trackEvent(eventName, eventData = {}) {
   if (typeof gtag !== 'undefined') {
-    gtag('event', eventName, eventData);
-    console.log(`📊 事件已追踪: ${eventName}`, eventData);
+    try {
+      gtag('event', eventName, eventData);
+      console.log(`📊 事件已追踪: ${eventName}`, eventData);
+    } catch (error) {
+      console.error(`❌ 追踪事件失败 (${eventName}):`, error);
+    }
+  } else {
+    console.warn(`⚠️ gtag 未定义，无法追踪事件: ${eventName}`);
   }
 }
 
@@ -27,7 +33,7 @@ function trackEvent(eventName, eventData = {}) {
  */
 function trackPageView(pagePath, pageTitle) {
   if (typeof gtag !== 'undefined') {
-    gtag('config', 'G-XXXXXXXXXX', {
+    gtag('config', 'G-4XWHX7S9M5', {
       'page_path': pagePath,
       'page_title': pageTitle
     });
@@ -298,7 +304,7 @@ function trackConversion(conversionName, conversionValue = 1) {
  */
 function setUserProperties(userId, userProperties = {}) {
   if (typeof gtag !== 'undefined') {
-    gtag('config', 'G-XXXXXXXXXX', {
+    gtag('config', 'G-4XWHX7S9M5', {
       'user_id': userId,
       ...userProperties
     });
@@ -331,15 +337,23 @@ function logSessionInfo() {
 }
 
 // 当 DOM 加载完成时初始化
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() {
+// 等待 gtag 加载完成后再初始化追踪
+function waitForGtag() {
+  if (typeof gtag !== 'undefined') {
+    console.log('✅ gtag 已加载，初始化追踪...');
     initializeAnalyticsTracking();
     logSessionInfo();
-  });
+  } else {
+    // 如果 gtag 还没加载，等待 100ms 后重试
+    setTimeout(waitForGtag, 100);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', waitForGtag);
 } else {
-  // DOM 已经加载
-  initializeAnalyticsTracking();
-  logSessionInfo();
+  // DOM 已经加载，直接等待 gtag
+  waitForGtag();
 }
 
 // 导出函数供外部使用
